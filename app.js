@@ -1,5 +1,6 @@
 const KEY = "dwq_v1";
 const INTERVAL = [0, 1, 3, 7, 14]; // 박스 1~4: 복습 간격(일). 박스 0 = 새 단어
+const BOOKS = ["phonics1", "phonics2"];
 let words = [],
   state = load(),
   mode = "card",
@@ -121,11 +122,18 @@ function next() {
   flash();
 }
 
+function renderVisual(w) {
+  const src =
+    w.image || `words/${w.book}/images/${encodeURIComponent(w.word)}.jpg`;
+  const emoji = w.emoji || "";
+  return `<div class="visual"><img class="word-img" src="${src}" alt="${w.word}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="emoji" style="display:none">${emoji}</div></div>`;
+}
+
 function flash() {
   const w = cur;
   $("#stage").innerHTML = `
   <div class="card flip" id="fc">
-    <div class="emoji">${w.emoji}</div>
+    ${renderVisual(w)}
     <div class="word">${w.word}</div>
     <div class="syl">${w.syllables}</div>
     <button class="speak" id="sp" aria-label="발음 듣기">🔊</button>
@@ -175,7 +183,7 @@ function choiceQ() {
     opts = shuffle([w].concat(distractors(w)));
   $("#stage").innerHTML = `
   <div class="card">
-    <div class="emoji">${w.emoji}</div>
+    ${renderVisual(w)}
     <div class="meaning">${w.meaning}</div>
     <div class="hint">알맞은 영어 단어를 고르세요</div>
     <div class="opts">${opts.map((o) => `<button class="btn" data-id="${o.id}">${o.word}</button>`).join("")}</div>
@@ -184,10 +192,10 @@ function choiceQ() {
   document.querySelectorAll(".opts .btn").forEach(
     (b) =>
       (b.onclick = () => {
-        const ok = +b.dataset.id === w.id;
+        const ok = b.dataset.id === String(w.id);
         document.querySelectorAll(".opts .btn").forEach((x) => {
           x.disabled = true;
-          if (+x.dataset.id === w.id) x.classList.add("right");
+          if (x.dataset.id === String(w.id)) x.classList.add("right");
         });
         if (!ok) b.classList.add("wrong");
         speak(w.word);
@@ -217,7 +225,7 @@ function spellQ() {
     [...word].map((c, i) => (idx.includes(i) ? filled[i] || "_" : c)).join(" ");
   $("#stage").innerHTML = `
   <div class="card">
-    <div class="emoji">${w.emoji}</div>
+    ${renderVisual(w)}
     <div class="meaning">${w.meaning}</div>
     <div class="blank" id="bl">${show()}</div>
     <div class="letters">${pool.map((c) => `<button class="btn">${c}</button>`).join("")}</div>
@@ -268,6 +276,7 @@ document.querySelectorAll("#tabs button").forEach(
     }),
 );
 
+$("#book").onchange = () => loadBook($("#book").value);
 $("#unit").onchange = start;
 
 $("#exp").onclick = () => {
@@ -306,17 +315,65 @@ $("#reset").onclick = () => {
   }
 };
 
-fetch("words/phonics.json")
-  .then((r) => r.json())
-  .then((d) => {
-    words = d;
-    $("#unit").innerHTML = [...new Set(d.map((w) => w.unit))]
-      .map((u) => `<option>${u}</option>`)
+async function getBooks() {
+  try {
+    const r = await fetch("words/");
+    if (r.ok) {
+      const html = await r.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const dirs = [...doc.querySelectorAll("a")]
+        .map((a) => a.getAttribute("href") || "")
+        .filter(
+          (h) =>
+            h &&
+            !h.startsWith("?") &&
+            !h.startsWith("#") &&
+            !h.startsWith(".."),
+        )
+        .map((h) => decodeURIComponent(h.replace(/\/+$/, "").split("/").pop()))
+        .filter(
+          (name) =>
+            name &&
+            name !== "words" &&
+            name !== "." &&
+            name !== ".." &&
+            !name.includes("."),
+        );
+      if (dirs.length) return [...new Set(dirs)].sort();
+    }
+  } catch (e) {}
+  return BOOKS;
+}
+
+async function loadBook(book) {
+  try {
+    const bookName = book.replace(/\.json$/i, "").replace(/\/+$/, "");
+    const r = await fetch(`words/${bookName}/index.json`);
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    words = d.map((w) => ({
+      ...w,
+      book: bookName,
+      id: `${bookName}:${w.id}`,
+    }));
+    const units = [...new Set(words.map((w) => w.unit).filter(Boolean))];
+    $("#unit").innerHTML = units
+      .map((u) => `<option value="${u}">${u}</option>`)
       .join("");
     if (window.speechSynthesis) speechSynthesis.getVoices();
     start();
-  })
-  .catch(() => {
+  } catch (e) {
     $("#stage").innerHTML =
-      '<div class="card empty">words.json을 불러올 수 없어요.<br>파일을 더블클릭하지 말고 GitHub Pages나 로컬 서버(<code>python -m http.server</code>)로 열어 주세요.</div>';
-  });
+      '<div class="card empty">단어장 파일을 불러올 수 없어요.<br>파일을 더블클릭하지 말고 GitHub Pages나 로컬 서버(<code>python -m http.server</code>)로 열어 주세요.</div>';
+  }
+}
+
+getBooks().then((books) => {
+  $("#book").innerHTML = books
+    .map((b) => {
+      const name = b.replace(/\.json$/i, "").replace(/\/+$/, "");
+      return `<option value="${name}">${name}</option>`;
+    })
+    .join("");
+  if (books.length) loadBook($("#book").value);
+});

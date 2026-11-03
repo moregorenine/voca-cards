@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "unit": "Day 01",
+    "word": "adventure",
+    "meaning": "모험",
+    "pos": "noun",
+    "syllables": "ad-ven-ture",
+    "example_en": "They went on an exciting adventure.",
+    "example_ko": "그들은 신나는 모험을 떠났다."
+  },
+  {
+    "id": 2,
+    "unit": "Day 01",
+    "word": "brave",
+    "meaning": "용감한",
+    "pos": "adj",
+    "syllables": "brave",
+    "example_en": "The brave knight saved the town.",
+    "example_ko": "용감한 기사가 마을을 구했다."
+  },
+  {
+    "id": 3,
+    "unit": "Day 01",
+    "word": "castle",
+    "meaning": "성",
+    "pos": "noun",
+    "syllables": "cas-tle",
+    "example_en": "The king lives in a big castle.",
+    "example_ko": "왕은 큰 성에 산다."
+  },
+  {
+    "id": 4,
+    "unit": "Day 01",
+    "word": "dragon",
+    "meaning": "용",
+    "pos": "noun",
+    "syllables": "dra-gon",
+    "example_en": "The dragon can breathe fire.",
+    "example_ko": "용은 불을 뿜을 수 있다."
+  },
+  {
+    "id": 5,
+    "unit": "Day 01",
+    "word": "forest",
+    "meaning": "숲",
+    "pos": "noun",
+    "syllables": "for-est",
+    "example_en": "We walked through the forest.",
+    "example_ko": "우리는 숲속을 걸었다."
+  },
+  {
+    "id": 6,
+    "unit": "Day 01",
+    "word": "treasure",
+    "meaning": "보물",
+    "pos": "noun",
+    "syllables": "trea-sure",
+    "example_en": "They found a hidden treasure.",
+    "example_ko": "그들은 숨겨진 보물을 찾았다."
+  },
+  {
+    "id": 7,
+    "unit": "Day 01",
+    "word": "journey",
+    "meaning": "여행, 여정",
+    "pos": "noun",
+    "syllables": "jour-ney",
+    "example_en": "The journey took three days.",
+    "example_ko": "여정은 사흘이 걸렸다."
+  },
+  {
+    "id": 8,
+    "unit": "Day 01",
+    "word": "magic",
+    "meaning": "마법",
+    "pos": "noun",
+    "syllables": "mag-ic",
+    "example_en": "She learned a magic trick.",
+    "example_ko": "그녀는 마술 하나를 배웠다."
+  },
+  {
+    "id": 9,
+    "unit": "Day 02",
+    "word": "happy",
+    "meaning": "행복한",
+    "pos": "adj",
+    "syllables": "hap-py",
+    "example_en": "I am happy today.",
+    "example_ko": "나는 오늘 행복하다."
+  },
+  {
+    "id": 10,
+    "unit": "Day 02",
+    "word": "quiet",
+    "meaning": "조용한",
+    "pos": "adj",
+    "syllables": "qui-et",
+    "example_en": "Please be quiet in the library.",
+    "example_ko": "도서관에서는 조용히 해 주세요."
+  },
+  {
+    "id": 11,
+    "unit": "Day 02",
+    "word": "quick",
+    "meaning": "빠른",
+    "pos": "adj",
+    "syllables": "quick",
+    "example_en": "The rabbit is quick.",
+    "example_ko": "토끼는 빠르다."
+  },
+  {
+    "id": 12,
+    "unit": "Day 02",
+    "word": "gentle",
+    "meaning": "부드러운, 온화한",
+    "pos": "adj",
+    "syllables": "gen-tle",
+    "example_en": "He is gentle with animals.",
+    "example_ko": "그는 동물에게 다정하다."
+  },
+  {
+    "id": 13,
+    "unit": "Day 02",
+    "word": "borrow",
+    "meaning": "빌리다",
+    "pos": "verb",
+    "syllables": "bor-row",
+    "example_en": "Can I borrow your pencil?",
+    "example_ko": "네 연필을 빌려도 될까?"
+  },
+  {
+    "id": 14,
+    "unit": "Day 02",
+    "word": "decide",
+    "meaning": "결정하다",
+    "pos": "verb",
+    "syllables": "de-cide",
+    "example_en": "I decided to join the club.",
+    "example_ko": "나는 동아리에 들어가기로 결정했다."
+  },
+  {
+    "id": 15,
+    "unit": "Day 02",
+    "word": "explore",
+    "meaning": "탐험하다",
+    "pos": "verb",
+    "syllables": "ex-plore",
+    "example_en": "Let's explore the cave.",
+    "example_ko": "동굴을 탐험해 보자."
+  },
+  {
+    "id": 16,
+    "unit": "Day 02",
+    "word": "protect",
+    "meaning": "보호하다",
+    "pos": "verb",
+    "syllables": "pro-tect",
+    "example_en": "Trees protect us from the sun.",
+    "example_ko": "나무는 햇빛으로부터 우리를 보호한다."
+  }
+]

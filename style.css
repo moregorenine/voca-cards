@@ -42,6 +42,12 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.selects {
+  display: flex;
+  gap: 6px;
 }
 
 h1 {
@@ -129,9 +135,26 @@ select {
   cursor: pointer;
 }
 
+.visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.word-img {
+  max-width: 160px;
+  max-height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
 .emoji {
   font-size: 4rem;
   line-height: 1;
+}
+
+.emoji:empty {
+  display: none !important;
 }
 
 .word {
