@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Word Quest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>🗡️ Daily Word Quest</h1>
+      <select id="unit" aria-label="단원 선택"></select>
+    </header>
+    <div class="stats">
+      <span id="streak"></span>
+      <div class="bar"><i id="prog"></i></div>
+      <span id="due"></span>
+    </div>
+    <div class="tabs" id="tabs">
+      <button data-m="card" class="on">📇 카드</button>
+      <button data-m="quiz">🎮 퀴즈</button>
+      <button data-m="review">⭐ 복습</button>
+    </div>
+    <div id="stage"></div>
+    <details>
+      <summary>학습 기록 (보호자용)</summary>
+      <p id="report"></p>
+      <div class="row">
+        <button class="btn" id="exp">내보내기</button>
+        <button class="btn" id="imp">가져오기</button>
+        <button class="btn" id="reset">초기화</button>
+      </div>
+      <p>기록은 이 기기·브라우저에만 저장됩니다. 기기를 바꿀 때는 내보내기/가져오기를 사용하세요.</p>
+    </details>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
